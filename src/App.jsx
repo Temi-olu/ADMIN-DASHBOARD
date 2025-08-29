@@ -6,8 +6,9 @@ import Home from './component/Home'
 function App() {
   return (
     <div className='flex'>
-      <Header/>
+     
       <Sidebar/>
+       <Header/>
       <Home/>
     </div>
   )
