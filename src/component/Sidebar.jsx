@@ -1,6 +1,5 @@
-
 import { MdAdminPanelSettings } from "react-icons/md";
-import me from '../assets/me.jpg'
+import me from "../assets/me.jpg";
 import {
   BarChart3,
   Calendar,
@@ -14,129 +13,179 @@ import {
   ShoppingBag,
   Users,
 } from "lucide-react";
-
-
-
+import { useState } from "react";
 
 const menuItems = [
-  { 
-    id: 'dashboard',
+  {
+    id: "dashboard",
     icon: LayoutDashboard,
-    label: 'Dashboard',
+    label: "Dashboard",
     active: true,
-    badge: 'New',
+    badge: "New",
   },
   {
-    id: 'analytics',
+    id: "analytics",
     icon: BarChart3,
-    label: 'Analytics',
+    label: "Analytics",
     submenu: [
-      { id: 'overview', label: 'Overview' },
-      { id: 'reports', label: 'Reports' },
-      { id: 'insights', label: 'Insights' },
+      { id: "overview", label: "Overview" },
+      { id: "reports", label: "Reports" },
+      { id: "insights", label: "Insights" },
     ],
   },
   {
-    id: 'users',
+    id: "users",
     icon: Users,
-    label: 'Users',
-    count: '2.1k',
+    label: "Users",
+    count: "2.1k",
     submenu: [
-      { id: 'all-users', label: 'All Users' },
-      { id: 'roles', label: 'Roles & Permissions' },
+      { id: "all-users", label: "All Users" },
+      { id: "roles", label: "Roles & Permissions" },
     ],
   },
- 
+
   {
-    id: 'eccommerce',
+    id: "eccommerce",
     icon: ShoppingBag,
-    label: 'E-commerce',
+    label: "E-commerce",
     submenu: [
-      { id: 'product', label: 'All Tasks' },
-      { id: 'orders', label: 'To Do' },
-      { id: 'customers', label: 'Completed' }
+      { id: "product", label: "All Tasks" },
+      { id: "orders", label: "To Do" },
+      { id: "customers", label: "Completed" },
     ],
   },
   {
-    id: 'inventory',
+    id: "inventory",
     icon: Package,
-    label: 'Inventory',
-    count: "823"
+    label: "Inventory",
+    count: "823",
   },
-   {
-    id: 'transactions',
+  {
+    id: "transactions",
     icon: CreditCard,
-    label: 'Transactions',
-    count: "823"
+    label: "Transactions",
+    count: "823",
   },
-   {
-    id: 'messages',
+  {
+    id: "messages",
     icon: MessageSquare,
-    label: 'Mess ages',
-    badge: "10"
+    label: "Messages",
+    badge: "10",
   },
   {
-    id: 'calendars',
+    id: "calendars",
     icon: Calendar,
-    label: 'Calendar',
-  },
-   {
-    id: 'reports',
-    icon: FileText,
-    label: 'Reports',
+    label: "Calendar",
   },
   {
-    id: 'settings',
+    id: "reports",
+    icon: FileText,
+    label: "Reports",
+  },
+  {
+    id: "settings",
     icon: Settings,
-    label: 'Settings',
+    label: "Settings",
     submenu: [
-      { id: 'general', label: 'General' },
-      { id: 'security', label: 'Security' },
-      { id: 'notifications', label: 'Notifications' }
+      { id: "general", label: "General" },
+      { id: "security", label: "Security" },
+      { id: "notifications", label: "Notifications" },
     ],
   },
 ];
 
-
-
-
-
-function Sidebar() {
+function Sidebar({ onToggle, onPageChange, currentPage, collapsed }) {
+  const [expandedItems, setExpandedItems] = useState(new Set(["analytics"]));
+  // const [openbar, setOpenbar] = useState("");
+function toogleExpanded(itemId){
+  const newExpanded = new Set(expandedItems);
+  // }If it’s open → close it.
+  if (newExpanded.has(itemId)) {
+  newExpanded.delete(itemId);
+  }
+// If it’s closed → open it."
+ else {
+  newExpanded.add(itemId);
+}
+setExpandedItems(newExpanded);
+}
   return (
-    <div className="w-48 h-screen bg-white shadow-sm">
-      <MdAdminPanelSettings  size={40} className=" ml-6 text-blue-700 relative top-5"/> 
-      <div className="relative left-15 bottom-5 ">
-      <h1 className="text-sm font-bold ml-2">REINA</h1>
-      <p className="text-sm ml-2">Admin Panel</p>
-      </div>
-       {/* icons */}
-       {menuItems.map((items)=> 
-      <div key={items.id} className="text-sm" >
-        <button className="">
-        <div className="flex gap-2 mb-3 p-2">
-          <items.icon/>
-          <div className="flex gap-2">
-          <span className="font-bold">{items.label}</span>
-         {items.badge && <span className="bg-red-500 text-white px-2 py-1 rounded-lg">{items.badge}</span>}
-        {items.count && <span className="bg-gray-200 text-white px-2 py-1 rounded-lg">{items.count}</span>}
-             {items.submenu && <ChevronDown/>}
-          </div>
+    <div
+      className={`${collapsed ? "w-20" : "w-48"} h-screen bg-white shadow-sm`}
+    >
+      <MdAdminPanelSettings
+        size={40}
+        className=" ml-6 text-blue-700 relative top-5"
+      />
+      {!collapsed && (
+        <div className="relative left-15 bottom-5 ">
+          <h1 className="text-sm font-bold ml-2">REINA</h1>
+          <p className="text-sm ml-2">Admin Panel</p>
         </div>
-        </button>
-      </div>
       )}
-        {/* profile */}
-        <div className="relative left-2 top-3">
-        <img src={me}  alt="user" className="w-10 h-10 rounded-full ring-2 ring-blue-400 "/> 
-        <div className="relative left-12 bottom-10">
-         <h1 className="text-sm font-bold">Temi Olu</h1>
-         <p className="text-sm">Adminstrator</p>
-      </div>
-      
-       </div>
+      {/* icons */}
+      {menuItems.map((items) => (
+        <div key={items.id} className="text-sm">
+          <button
+          className={` ${
+              currentPage === items.id || items.active
+                ? "bg-gradient-to-r from-blue-500 to-purple-600  m-2 rounded-lg h-12"
+                : "hover:bg-gray-200 hover:shadow-sm hover:rounded-xl hover:w-40  hover:p-2 "
+            }`}
+             onClick={() => {
+             if (items.submenu) {
+                toogleExpanded(items.id)
+             } else {
+              onPageChange(items.id)
+             }
+          }}
+          >
+            <div className=" flex gap-2 px-1 ml-2">
+              <items.icon />
+              {/* conditional rendering */}
 
+              <span className="font-bold">{items.label}</span>
+              {items.badge && (
+                <span className="bg-red-500 text-white px-2 py-1 rounded-lg">
+                  {items.badge}
+                </span>
+              )}
+              {items.count && (
+                <span className="bg-gray-200 text-white px-2 py-1 rounded-lg">
+                  {items.count}
+                </span>
+              )}
+              {!collapsed && items.submenu && <ChevronDown />}
+            </div>
+          </button>
+          {/* subMenu */}
+          <ul>
+            {!collapsed && items.submenu && expandedItems.has(items.id) && (
+              <div>
+                {items.submenu.map((subitems) => (
+                  <li key={subitems.id}>
+                    <button className="ml-10 hover:bg-gray-200 hover:rounded-sm hover:px-1">{subitems.label}</button>
+                  </li>
+                ))}
+              </div>
+            )}
+          </ul>
+        </div>
+      ))}
+      {/* profile */}
+      <div className="relative left-2 top-3">
+        <img
+          src={me}
+          alt="user"
+          className="w-10 h-10 rounded-full ring-2 ring-blue-400 "
+        />
+        <div className="relative left-12 bottom-10">
+          <h1 className="text-sm font-bold">Temi Olu</h1>
+          <p className="text-sm">Adminstrator</p>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;
