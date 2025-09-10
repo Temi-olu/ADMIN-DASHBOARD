@@ -111,11 +111,11 @@ setExpandedItems(newExpanded);
 }
   return (
     <div
-      className={`${collapsed ? "w-20" : "w-48"} h-screen bg-white shadow-sm`}
+      className={`${collapsed ? "w-20" : "w-48"} h-screen  bg-white shadow-sm`}
     >
       <MdAdminPanelSettings
         size={40}
-        className=" ml-6 text-blue-700 relative top-5"
+        className=" ml-6 text-blue-700 relative top-5 "
       />
       {!collapsed && (
         <div className="relative left-15 bottom-5 ">
@@ -127,11 +127,15 @@ setExpandedItems(newExpanded);
       {menuItems.map((items) => (
         <div key={items.id} className="text-sm">
           <button
-          className={` ${
-              currentPage === items.id || items.active
-                ? "bg-gradient-to-r from-blue-500 to-purple-600  m-2 rounded-lg h-12"
-                : "hover:bg-gray-200 hover:shadow-sm hover:rounded-xl hover:w-40  hover:p-2 "
-            }`}
+                className={` -mt-1
+                  flex items-center gap-2 m-2 rounded-lg h-12
+                  ${collapsed ? "justify-center w-12 relative top-11" : " "}
+                  ${
+                    currentPage === items.id || items.active
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
+                      : "hover:bg-gray-100"
+                  }
+                `}
              onClick={() => {
              if (items.submenu) {
                 toogleExpanded(items.id)
@@ -143,18 +147,20 @@ setExpandedItems(newExpanded);
             <div className=" flex gap-2 px-1 ml-2">
               <items.icon />
               {/* conditional rendering */}
-
-              <span className="font-bold">{items.label}</span>
-              {items.badge && (
-                <span className="bg-red-500 text-white px-2 py-1 rounded-lg">
-                  {items.badge}
-                </span>
+             {!collapsed && (
+            <div>
+               <span className="font-bold">{items.label}</span>
+              {items.badge && (<span className="bg-red-500 text-white px-2 py-1 rounded-lg">
+                  {items.badge}</span>
               )}
               {items.count && (
                 <span className="bg-gray-200 text-white px-2 py-1 rounded-lg">
                   {items.count}
                 </span>
               )}
+            </div>
+             )}
+          
               {!collapsed && items.submenu && <ChevronDown />}
             </div>
           </button>
@@ -173,17 +179,21 @@ setExpandedItems(newExpanded);
         </div>
       ))}
       {/* profile */}
+     
       <div className="relative left-2 top-3">
         <img
           src={me}
           alt="user"
-          className="w-10 h-10 rounded-full ring-2 ring-blue-400 "
+          className={`${collapsed ? "relative top-8 left-1": ""} w-10 h-10 rounded-full ring-2 ring-blue-400 `}
         />
+         {!collapsed &&  (
         <div className="relative left-12 bottom-10">
           <h1 className="text-sm font-bold">Temi Olu</h1>
           <p className="text-sm">Adminstrator</p>
         </div>
+        )}
       </div>
+      
     </div>
   );
 }

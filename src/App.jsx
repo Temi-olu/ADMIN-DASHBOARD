@@ -1,7 +1,8 @@
 
 import Header from './component/Header'
 import Sidebar from './component/Sidebar'
-import Home from './component/Home'
+import Dashboard from './Dashboard/Dashboard'
+
 import { useState } from 'react';
 
 function App() {
@@ -9,15 +10,24 @@ function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
 
   return (
-    <div className='flex overflow-y-hidden '>
+    <div className=' bg-gray-200 flex overflow-x-hidden overflow-y-hidden '>
      <Sidebar
        collapsed={sideBarCollapsed}
       onToggle={() => setSideBarCollapsed(!sideBarCollapsed)}
       onPageChange={setCurrentPage}
        currentPage={currentPage}
       />
-       <Header/> 
-      <Home/>
+       <Header sideBarCollapsed={sideBarCollapsed} onToggleSideBar={()=> setSideBarCollapsed(!sideBarCollapsed)}/> 
+       {/* mainpages */}
+     <main className='relative top-20 right-[1430px]' >
+      <div>
+        {currentPage === "dashboard" && <Dashboard/>}
+       
+      </div>
+      </main>      
+    
+
+
     </div>
   )
 }
