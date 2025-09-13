@@ -3,7 +3,7 @@ export const stats = [
   {
     title: "Revenue",
     value: "$12,430",
-    change: "8.5%",
+    change: "+8.5%",
     trend: "up",
     icon: DollarSign,
     color: "from-green-500 to-emerald-600",
@@ -13,7 +13,7 @@ export const stats = [
   {
     title: "New Users",
     value: "1,245",
-    change: "4.2%",
+    change: "+4.2%",
     trend: "up",
     icon: Users,
     color: "from-blue-500 to-indigo-600",
@@ -23,7 +23,7 @@ export const stats = [
   {
     title: "Page Views",
     value: "45,892",
-    change: "2.1%",
+    change: "-2.1%",
     trend: "down",
     icon: Eye,
     color: "from-orange-500 to-red-600",
@@ -33,7 +33,7 @@ export const stats = [
   {
     title: "Orders",
     value: "983",
-    change: "6.3%",
+    change: "+6.3%",
     trend: "up",
     icon: ShoppingCart,
     color: "from-purple-500 to-pink-600",
@@ -50,4 +50,18 @@ export const stats = [
 //     bgColor: "bg-red-50 dark:bg-red-900/20",
 //     textColor: "text-red-600 dark:text-red-400",
 //   },
+];
+export const monthlyData = [
+  { month: "Jan", revenue: 45000, expenses: 32000 },
+  { month: "Feb", revenue: 47000, expenses: 31000 },
+  { month: "March", revenue: 52000, expenses: 34000 },
+  { month: "April", revenue: 48000, expenses: 33000 },
+  { month: "May", revenue: 50000, expenses: 35000 },
+  { month: "June", revenue: 53000, expenses: 36000 },
+  { month: "July", revenue: 49000, expenses: 34000 },
+  { month: "August", revenue: 55000, expenses: 37000 },
+  { month: "Sept", revenue: 56000, expenses: 38000 },
+  { month: "Oct", revenue: 60000, expenses: 40000 },
+  { month: "Nov", revenue: 62000, expenses: 41000 },
+  { month: "Dec", revenue: 65000, expenses: 43000 }
 ];
