@@ -3,7 +3,7 @@ import  {stats} from "../data.mjs";
 import { ArrowUpDown, ArrowUpRight } from 'lucide-react';
 function Stats() {
   return (
-<div className="grid grid-cols-4 gap-74 ml-5 mt-2 ">
+<div className="grid grid-cols-4 gap-18 ml-5 mt-2 ">
   {stats.map((item, index) => (
     <div
       key={index}

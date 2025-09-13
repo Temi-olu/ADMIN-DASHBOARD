@@ -1,13 +1,11 @@
-import React from 'react'
 import Stats from './Stats'
-import ChartSection from './ChartSection'
+import ChartSection from '../Dashboard/ChartSection'
 
 function Dashboard() {
   return (
     <div className=''>
      <Stats/>
      <ChartSection/>
-     
     </div>
   )
 }

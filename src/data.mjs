@@ -65,3 +65,9 @@ export const monthlyData = [
   { month: "Nov", revenue: 62000, expenses: 41000 },
   { month: "Dec", revenue: 65000, expenses: 43000 }
 ];
+export const salesData = [
+  { name: "Electronics", value: 45, color: "#4CAF50" },
+  { name: "Clothing", value: 30, color: "#2196F3" },
+  { name: "Furniture", value: 20, color: "#FF9800" },
+  { name: "Groceries", value: 55, color: "#F44336" }
+];

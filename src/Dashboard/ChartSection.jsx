@@ -1,10 +1,12 @@
-import React from 'react'
 import RevenueChart from './RevenueChart'
+import SalesCategory from './SalesCategory'
+
 
 function ChartSection() {
   return (
-    <div>
+    <div className='flex'>
       <RevenueChart/>
+      <SalesCategory/>
     </div>
   )
 }
